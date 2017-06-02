@@ -37,11 +37,11 @@ There is some Security fixes as we see here on the changelogs :
 - The least privilege principle in the Apache folder :
 -- Remove ownership and give it to user
 chown -R vagrant /var/www/ ´replace vagrant by the username´
--- Give group ownership on folder to Apache
+..- Give group ownership on folder to Apache
 chown -R :www-data /var/www/ ´Do not forget the ":" saying that it's the group
--- Apache shoud only execute folder
+..- Apache shoud only execute folder
 ´find . -type d -exec chmod 610 {} +´ : recursively find folder and set execute only for folder
--- Apache shoud only read files :
+..- Apache shoud only read files :
 ´find . -type f -exec chmod 640 {} +´ : recursively find files and set readonly for groups
 ### Questions :
 - What are the UID and GID of www-data ?
@@ -56,6 +56,7 @@ Create a group web-share
 Add root as the only owner
 Doing critical changes as modifying content are restricted
 Deleting and adding files, are allowed.
+We just add a new group to the user and www-data
 ´addgroup web-share´ : creating the group
 ´sudo chown -R :web-share .´ : change file/folder to web-share group
 ´usermod -a -G web-share vagrant´ : append the group to user vagrant
@@ -63,9 +64,9 @@ Deleting and adding files, are allowed.
 ´find . -type d -exec chmod 070 {} +´ : allow the group to list execute and write folder (delete/create files)
 ´find . -type f -exec chmod 040 {} +´ : allow the group to read the file only.
 !!!!!!! ´sevice apache2 restart´ : for group change to take effect imediately
-
-
-
+## Package metadata
+- how much space is used by the metadata in ´/var/lib/apt/lists´?
+´du -h´ : output : 126M of metadata
 
 
 
