@@ -51,6 +51,25 @@ There is some Security fixes as we see here on the changelogs :
 > The permission : 755 for folder, 644 for files
 - In the initial configuration, through which permissions (Owner, Group or Others) does the Apache process get read access?
 > The three of them have read access, but as Apache is the owner he check the user section.
+- Imaginating a more flexible way to share this folder amongs users:
+> Create a group web-share
+> Add root as the only owner
+> Doing critical changes as modifying content are restricted
+> Deleting and adding files, are allowed.
+´addgroup web-share´ : creating the group
+´sudo chown -R :web-share .´ : change file/folder to web-share group
+´usermod -a -G web-share vagrant´ : append the group to user vagrant
+´usermod -a -G web-share www-data´ : append the group to user www-data
+´find . -type d -exec chmod 070 {} +´ : allow the group to list execute and write folder (delete/create files)
+´find . -type f -exec chmod 040 {} +´ : allow the group to read the file only.
+!!!!!!! ´sevice apache2 restart´ : for group change to take effect imediately
+
+
+
+
+
+
+
 
 
 
