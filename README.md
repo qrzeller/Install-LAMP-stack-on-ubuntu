@@ -23,7 +23,7 @@ There is some Security fixes as we see here on the changelogs :
     - No CVE number 
     - LP: #1648806 "
 ´
-##Task 3 : Install a LAMP stack (Apache, MySQL, PHP)
+## Task 3 : Install a LAMP stack (Apache, MySQL, PHP)
 - Gain root priviledge : ´sudo su´
 - Instal Appache 2 : ´apt-get install apache2 -y´
 -- To test the server is up, we need to make a port forwrding to the host. Or attribute a local ip address to the vagrant, by writing on the Vagrantfile ´config.vm.network :forwarded_port, guest: 80, host: 8080´ for the port forwarding or ´config.vm.network "private_network", ip: "192.168.50.4"´ or ´config.vm.network "private_network", type: "dhcp"´ for private networking. Using the gui of virtualbox is also possible, but is one time.
@@ -35,4 +35,11 @@ There is some Security fixes as we see here on the changelogs :
 - echo ´"<?php \n phpinfo(); \n ?>" > info.php´ to test the php connection. The info of environnement and configuration will appear.
 ## Task 4 : Configure file permission
 - The least privilege principle in the Apache folder :
--- 
+-- Remove Writting permission to Apache for files
+-- Remove ownership and give it to user
+> chown -R vagrant /var/www/ ´replace vagrant by the username´
+-- Give group ownership on folder to Apache
+> chown -R :www-data /var/www/ ´Do not forget the ":" saying that it's the group
+-- Apache shoud not have write permission fo folder
+
+
