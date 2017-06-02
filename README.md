@@ -1,17 +1,17 @@
 
 
-#Install LAMP stack on ubuntu
-#Preamble
+# Install LAMP stack on ubuntu
+# Preamble
 - Installing vagrant environnement
 - Getting the last ubuntu trusty release.
 -- For this, go to the vagrant repository, for the last Vagrantfile, or add that line to it ´config.vm.box = "ubuntu/trusty64"´
 - then ´vagrant up && vagrant ssh´
 -done
 
-##Task 1 : Select the best repository
+## Task 1 : Select the best repository
 nano /etc/apt/source.lst
 >> replace update link by the mirror switch for ubuntu
-##Task 2 : Update all installed package
+## Task 2 : Update all installed package
 sudo su
 apt update && apt upgrade -y ´if update succed, upgrade and say yes to all´
 more /var/log/apt/history.log ´The last command is the lassat block. The firs block is installed pakage, the second is updated package. Taking the first upgraded packet : python3-problem-report:amd64´
@@ -33,6 +33,6 @@ There is some Security fixes as we see here on the changelogs :
 - Launch : ´mysql_secure_installation´ to remove some dangerous settings.
 - Install PHP : ´sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt´
 - echo ´"<?php \n phpinfo(); \n ?>" > info.php´ to test the php connection. The info of environnement and configuration will appear.
-##Task 4 : Configure file permission
+## Task 4 : Configure file permission
 - The least privilege principle in the Apache folder :
 -- 
