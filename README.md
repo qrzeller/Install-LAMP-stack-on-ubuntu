@@ -35,11 +35,24 @@ There is some Security fixes as we see here on the changelogs :
 - echo ´"<?php \n phpinfo(); \n ?>" > info.php´ to test the php connection. The info of environnement and configuration will appear.
 ## Task 4 : Configure file permission
 - The least privilege principle in the Apache folder :
--- Remove Writting permission to Apache for files
 -- Remove ownership and give it to user
 > chown -R vagrant /var/www/ ´replace vagrant by the username´
 -- Give group ownership on folder to Apache
 > chown -R :www-data /var/www/ ´Do not forget the ":" saying that it's the group
--- Apache shoud not have write permission fo folder
+-- Apache shoud only execute folder
+> ´find . -type d -exec chmod 610 {} +´ : recursively find folder and set execute only for folder
+-- Apache shoud only read files :
+> ´find . -type f -exec chmod 640 {} +´ : recursively find files and set readonly for groups
+### Questions :
+- What are the UID and GID of www-data ?
+> ´id www-data´ : the uid and the gid are 33.
+- What was the owner, group owner of files ./index.html and directory html/?
+> The owner and group owner was www-data.
+> The permission : 755 for folder, 644 for files
+- In the initial configuration, through which permissions (Owner, Group or Others) does the Apache process get read access?
+> The three of them have read access, but as Apache is the owner he check the user section.
+
+
+
 
 
